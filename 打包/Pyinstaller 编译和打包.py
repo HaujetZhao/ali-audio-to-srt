@@ -30,12 +30,12 @@ import platform
 
 使用虚拟环境 = True
 源码分开打包 = True
-依赖文件重新7z打包 = True
+依赖文件重新7z打包 = False
 
-软件名字 = 'src'
+软件名字 = '阿里云音频转字幕'
 
 # 源文件夹不要带空格，不要带减号，不要带中文，否则 pip 打包会失败
-源码文件夹名 = 'src'
+源码文件夹名 = 'ali_audio_to_srt'
 源码文件夹路径 = f'../{源码文件夹名}'
 图标路径 = f'{源码文件夹名}/misc/icon.ico'
 隐藏控制台 = False
@@ -156,7 +156,9 @@ if os.path.exists(临时源文件夹): rmtree(临时源文件夹)
 排除列表 = [
     '/bin/**',
     '__init__.py',
-    '**/**.pyc'
+    '**/**.pyc',
+    '**.ini',
+    '**.db'
 ]
 if Path(临时源文件夹).exists(): rmtree(临时源文件夹)
 复制(源码文件夹路径, 临时源文件夹, 过滤规则列表=排除列表)
@@ -196,6 +198,7 @@ main.main()'''
                 					--hidden-import json
                 					--hidden-import timeit
                 					--hidden-import math
+                					--hidden-import cgi
                 					"{启动器路径}"
                 '''
     else: # 一起打包
@@ -223,7 +226,7 @@ else: # 非虚拟环境打包
 命令参数 = shlex.split(命令)
 subprocess.run(命令参数)
 os.remove(f'{临时源文件夹}/{启动器文件名}') # 删除 launcher.py
-rmtree(f'{临时源文件夹}/__pycache__')
+rmtree(f'{临时源文件夹}/__pycache__') if os.path.exists(f'{临时源文件夹}/__pycache__') else ...
 if 使用虚拟环境:
     if 源码分开打包:
         move(f'{临时源文件夹}/__main__.py', f'{临时源文件夹}/main.py')

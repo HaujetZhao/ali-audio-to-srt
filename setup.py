@@ -1,3 +1,4 @@
+# coding=utf-8
 # 程序名
 #
 # This Source Code Form is subject to the terms of the Mozilla Public
@@ -12,20 +13,22 @@ from setuptools import setup
 # twine upload -u USERNAME -p PASSWORD "dist/audio-video-resync-0.5.0.tar.gz"
 
 setup(
-    name='程序名',
+    name='ali-audio-to-srt',
     version='0.1.0',
-    description='描述',
+    description='使用阿里云服务的录音文件识别，将音频识别为 srt 字幕',
     author='Haujet Zhao',
     author_email='haujetzhao@qq.com',
     url='https://github.com/HaujetZhao/***',
     license='MPL-2.0 License',
     
     # 依赖包
-    install_requires=[
+    install_requires=['srt',
+            'aliyun-python-sdk-core',
+            'oss2'
         ],
     
     # 含有 py 文件的文件夹（源码文件夹）
-    packages=['src'
+    packages=['ali_audio_to_srt'
         ],
     
     # 每个本地包中需要包含的另外的文件
@@ -36,7 +39,9 @@ setup(
     # 安装后，命令行使用的入口
     entry_points={  # Options: console_scripts gui_scripts
             'console_scripts': [
-                'src=src.__main__:main'
+                'ali-audio-to-srt=ali_audio_to_srt.__main__:main',
+                'AliAudioToSrt=ali_audio_to_srt.__main__:main',
+                '阿里云转字幕=ali_audio_to_srt.__main__:main'
             ]
     },
     

@@ -1,0 +1,3 @@
+srt
+aliyun-python-sdk-core
+oss2
