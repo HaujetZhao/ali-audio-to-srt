@@ -30,7 +30,7 @@ import platform
 
 使用虚拟环境 = True
 源码分开打包 = True
-打包7z压缩包 = True
+依赖文件重新7z打包 = True
 
 软件名字 = 'src'
 
@@ -248,25 +248,26 @@ if 源码分开打包:
 exe文件名 = f'_{软件名字}.exe'
 move(f'./dist/{启动器}/{启动器}.exe', f'./dist/{启动器}/{exe文件名}')
 
-if 打包7z压缩包:
-    if 源码分开打包:
-        # 7z 压缩依赖文件，如果依赖文件 7z 包存在，那就不压缩了
+if 源码分开打包:
+    # 7z 压缩依赖文件，如果依赖文件 7z 包存在，那就不压缩了
 
-        包名 = f'依赖文件-{软件名字}_{platform.system()}.7z'
-        if not os.path.exists(包名):
-            print(f'7z 压缩依赖包')
-            压缩到7z(f'./dist/{启动器}/*', 包名)
-            # 依赖文件-AudioSyncVideo_Windows.7z
-            # 依赖文件-AudioSyncVideo_Windows.7z
-
-        # 7z 压缩源文件
-        包名 = f'源代码-{软件名字}_{platform.system()}.7z'
+    包名 = f'依赖文件-{软件名字}_{platform.system()}.7z'
+    if 依赖文件重新7z打包:
         if os.path.exists(包名): os.remove(包名)
-        print(f'7z 压缩源代码')
-        压缩到7z(f'{临时源文件夹}/*', 包名)
+        print(f'7z 压缩依赖包')
+        压缩到7z(f'./dist/{启动器}/*', 包名)
+        # 依赖文件-AudioSyncVideo_Windows.7z
+        # 依赖文件-AudioSyncVideo_Windows.7z
 
-    else: # 只打包一个包
-        包名 = f'{软件名字}_{platform.system()}.7z'
+    # 7z 压缩源文件
+    包名 = f'源代码-{软件名字}_{platform.system()}.7z'
+    if os.path.exists(包名): os.remove(包名)
+    print(f'7z 压缩源代码')
+    压缩到7z(f'{临时源文件夹}/*', 包名)
+
+else: # 只打包一个包
+    包名 = f'{软件名字}_{platform.system()}.7z'
+    if 依赖文件重新7z打包:
         if os.path.exists(包名): os.remove(包名)
         print(f'7z 压缩整包')
         压缩到7z(f'./dist/{启动器}/*', 包名)
