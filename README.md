@@ -18,6 +18,7 @@ QuickCut 上的转字幕效果不好，有的句子太长，需要优化，但�
 
 使用后，会自动生成 `config.ini` 配置文件，请根据提示，在配置文件里填写上阿里云 API 相关参数。
 
+阿里云 api 的获取，可以参考这个 [视频教程](https://www.bilibili.com/video/BV18T4y1E7FF?p=11)
 ## ✨ 特性
 
 两种运行方式：
@@ -78,6 +79,8 @@ python -m ali_audio_to_srt
 ```
 
 ## 💡 使用
+
+注意：识别的音频或视频文件时长不能超过 4 个半小时。
 
 ```
 python -m ali_audio_to_srt

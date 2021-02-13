@@ -63,12 +63,13 @@ def main():
     else:
         引擎 = config[args.language]
     print(f'所使用的配置文件路径：{配置文件}')
-    print(f'使用引擎：{引擎.name}')
+    print(f'\n使用引擎：{引擎.name}')
 
     # 检查引擎项是否有空项，如果有，就请用户重新填
     if not all(list(map(lambda x: x[1], list(引擎.items())))):
-        print(f'检测到配置文件中的引擎有空项，请先在配置文件中将引擎信息填好，再重新运行')
-        if 不马上退出: input(f'按下回车结束程序')
+        print(f'\n检测到配置文件中的引擎有空项，请先在配置文件中将引擎信息填好，再重新运行')
+        print(f'阿里云 api 的获取，可以参考这个视频教程：https://www.bilibili.com/video/BV18T4y1E7FF?p=11')
+        if 不马上退出: input(f'\n按下回车结束程序')
         sys.exit()
 
     # if not any(list(引擎.items()))
@@ -99,7 +100,8 @@ def 检查配置文件(配置文件):
                 for item in items:
                     config[section][item] = ''
             config.write(f)
-        print(f'检测到还没有配置文件，已生成配置模板，请先将配置文件填好，再进行识别\n配置文件路径：{配置文件}')
+        print(f'\n检测到还没有配置文件，已生成配置模板，请先将配置文件填好，再进行识别\n配置文件路径：{配置文件}')
+        print(f'阿里云 api 的获取，可以参考这个视频教程：https://www.bilibili.com/video/BV18T4y1E7FF?p=11')
         if platform.system() == 'Windows':
             os.system(f'explorer /select, "{配置文件}"')
         input('按回车继续')
