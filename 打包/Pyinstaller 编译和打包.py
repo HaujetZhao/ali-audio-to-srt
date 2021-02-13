@@ -124,6 +124,11 @@ if 使用虚拟环境 and not os.path.exists('../pyvenv.cfg'):
     命令参数 = shlex.split(命令)
     subprocess.run(命令, cwd='..')
 
+    print(f'更新 pip')
+    命令 = f'"Scripts/pip" install -i https://pypi.tuna.tsinghua.edu.cn/simple pip -U'
+    命令参数 = shlex.split(命令)
+    subprocess.run(命令, cwd='..')
+
     print(f'开始在虚拟环境中安装依赖包')
     命令 = f'"Scripts/pip" install -l https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt'
     命令参数 = shlex.split(命令)

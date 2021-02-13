@@ -130,7 +130,7 @@ class AliTrans():
         字幕全部文本 = ''
         for i in range(len(self.任务详情['Result']['Sentences'])):
             字幕全部文本 = 字幕全部文本 + self.任务详情['Result']['Sentences'][i]['Text']
-        print(f'\n字幕文本：\n{字幕全部文本}')
+        print(f'字幕文本：\n{字幕全部文本}')
 
         单词合并 = ''
         for i in range(len(self.任务详情['Result']['Words'])):
@@ -154,6 +154,9 @@ class AliTrans():
                 本句字幕内容 += Word
                 字幕全部文本 = 字幕全部文本[len(Word):]
             else:
+                if Word not in 字幕全部文本:
+                    continue
+
                 结束时间 = lastEndTime
 
                 开始秒数 = 开始时间 // 1000
@@ -184,9 +187,9 @@ class AliTrans():
                 字幕全部文本 = 字幕全部文本[len(Word):]
 
                 # 以防有 bug，在这里中断：
-                if 删除次数 > 5:
-                    print('出问题了，返回的词和句子内容不同！')
-                    break
+                # if 删除次数 > 5:
+                #     print('出问题了，返回的词和句子内容不同！')
+                #     break
 
         字幕内容列表 = []
         for i in 字幕列表:

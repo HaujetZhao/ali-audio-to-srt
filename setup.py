@@ -41,6 +41,7 @@ setup(
             'console_scripts': [
                 'ali-audio-to-srt=ali_audio_to_srt.__main__:main',
                 'AliAudioToSrt=ali_audio_to_srt.__main__:main',
+                '阿里云音频转字幕=ali_audio_to_srt.__main__:main',
                 '阿里云转字幕=ali_audio_to_srt.__main__:main'
             ]
     },
