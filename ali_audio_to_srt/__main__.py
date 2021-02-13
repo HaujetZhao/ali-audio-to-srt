@@ -68,6 +68,7 @@ def main():
     # 检查引擎项是否有空项，如果有，就请用户重新填
     if not all(list(map(lambda x: x[1], list(引擎.items())))):
         print(f'检测到配置文件中的引擎有空项，请先在配置文件中将引擎信息填好，再重新运行')
+        if 不马上退出: input(f'按下回车结束程序')
         sys.exit()
 
     # if not any(list(引擎.items()))
