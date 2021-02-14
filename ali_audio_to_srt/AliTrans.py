@@ -7,6 +7,8 @@ from aliyunsdkcore.acs_exception.exceptions import ServerException
 from aliyunsdkcore.client import AcsClient
 from aliyunsdkcore.request import CommonRequest
 
+from icecream import ic
+
 class AliTrans():
     def __init__(self, appKey, language, accessKeyId, accessKeySecret):
         self.appKey = appKey
@@ -121,6 +123,26 @@ class AliTrans():
         return 成功查询
 
     def 结果转srt(self):
+
+        def 将本句字幕添加到列表():
+            开始秒数 = 开始时间 // 1000
+            开始毫秒数 = 开始时间 % 1000 * 1000
+            结束秒数 = 结束时间 // 1000
+            结束毫秒数 = 结束时间 % 1000 * 1000
+
+            # 设定字幕起始时间
+            if 开始秒数 == 0:
+                srt开始时间 = datetime.timedelta(microseconds=开始毫秒数)
+            else:
+                srt开始时间 = datetime.timedelta(seconds=开始秒数, microseconds=开始毫秒数)
+
+            # 设定字幕终止时间
+            if 结束秒数 == 0:
+                srt结束时间 = datetime.timedelta(microseconds=结束毫秒数)
+            else:
+                srt结束时间 = datetime.timedelta(seconds=结束秒数, microseconds=结束毫秒数)
+
+            字幕列表.append(srt.Subtitle(index=i, start=srt开始时间, end=srt结束时间, content=本句字幕内容))
         # print(f'任务详情：')
 
         # pprint(self.任务详情)
@@ -138,7 +160,8 @@ class AliTrans():
         print(f'单词合并：\n{单词合并}')
 
         字幕列表 = []
-        for i in range(len(self.任务详情['Result']['Words'])):
+        词语数量 = len(self.任务详情['Result']['Words'])
+        for i in range(词语数量):
             if i > 0:
                 lastEndTime = EndTime
             Word = self.任务详情['Result']['Words'][i]['Word']
@@ -153,30 +176,16 @@ class AliTrans():
             if 字幕全部文本[0] == Word[0]:
                 本句字幕内容 += Word
                 字幕全部文本 = 字幕全部文本[len(Word):]
+                if i + 1 == 词语数量:
+                    将本句字幕添加到列表()
+
             else:
                 if Word not in 字幕全部文本:
                     continue
 
-                结束时间 = lastEndTime
+                结束时间 = lastEndTime if i + 1 < 词语数量 else EndTime
 
-                开始秒数 = 开始时间 // 1000
-                开始毫秒数 = 开始时间 % 1000 * 1000
-                结束秒数 = 结束时间 // 1000
-                结束毫秒数 = 结束时间 % 1000 * 1000
-
-                # 设定字幕起始时间
-                if 开始秒数 == 0:
-                    srt开始时间 = datetime.timedelta(microseconds=开始毫秒数)
-                else:
-                    srt开始时间 = datetime.timedelta(seconds=开始秒数, microseconds=开始毫秒数)
-
-                # 设定字幕终止时间
-                if 结束秒数 == 0:
-                    srt结束时间 = datetime.timedelta(microseconds=结束毫秒数)
-                else:
-                    srt结束时间 = datetime.timedelta(seconds=结束秒数, microseconds=结束毫秒数)
-
-                字幕列表.append(srt.Subtitle(index=i, start=srt开始时间, end=srt结束时间, content=本句字幕内容))
+                将本句字幕添加到列表()
 
                 本句字幕内容 = Word
                 开始时间 = BeginTime
