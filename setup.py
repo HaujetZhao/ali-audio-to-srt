@@ -24,7 +24,8 @@ setup(
     # 依赖包
     install_requires=['srt',
             'aliyun-python-sdk-core',
-            'oss2'
+            'oss2',
+            'icecream'
         ],
     
     # 含有 py 文件的文件夹（源码文件夹）
