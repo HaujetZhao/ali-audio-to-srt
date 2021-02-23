@@ -15,6 +15,7 @@ import subprocess
 import sys
 import configparser
 import platform
+import threading
 import time
 from pathlib import Path
 from icecream import ic
@@ -126,7 +127,7 @@ def 处理文件(files, 引擎):
     线程数 = 16
     files = list(filter(lambda x: os.path.exists(x), files))
     for index, file in enumerate(files):
-        while len(线程列表) >= 线程数:
+        while len(threading.enumerate()) >= 线程数:
             time.sleep(1)
         print(f'\n总共有 {len(files)} 个文件需要识别，正在转码上传第 {index + 1} 个：{file}')
         # 生成 wav
