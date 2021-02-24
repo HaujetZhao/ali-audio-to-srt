@@ -17,6 +17,7 @@ import configparser
 import platform
 import threading
 import time
+import srt
 from pathlib import Path
 from icecream import ic
 from threading import Thread
@@ -255,6 +256,14 @@ class Wait_For_Response_To_Generate_Srt(Thread):
         print(f'写入文件：{srt文件}')
         with open(srt文件, 'w', encoding='utf-8') as f:
             f.write(srt内容)
+
+        srt文本文件 = os.path.splitext(self.文件)[0] + '.txt'
+        print(f'写入文本文件：{srt文本文件}')
+        with open(srt文本文件, 'w', encoding='utf-8') as f:
+            srt载入 = srt.parse(srt内容)
+            for 字幕 in srt载入:
+                f.write(f'{字幕.content}\n')
+
 
 
 
