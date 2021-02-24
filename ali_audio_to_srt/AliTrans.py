@@ -177,6 +177,7 @@ class AliTrans():
                 本句字幕内容 += Word
                 字幕全部文本 = 字幕全部文本[len(Word):]
                 if i + 1 == 词语数量:
+                    结束时间 = EndTime
                     将本句字幕添加到列表()
 
             else:
@@ -204,6 +205,8 @@ class AliTrans():
         for i in 字幕列表:
             字幕内容列表.append(i.content)
         print(f'优化后的字幕内容合并：')
+        pprint(字幕列表)
         pprint(字幕内容列表)
+
 
         return srt.compose(字幕列表, reindex=True, start_index=1, strict=True)
