@@ -167,6 +167,12 @@ class AliTrans():
             Word = self.任务详情['Result']['Words'][i]['Word']
             BeginTime = self.任务详情['Result']['Words'][i]['BeginTime']
             EndTime = self.任务详情['Result']['Words'][i]['EndTime']
+
+            # 如果是英文，它在句子中有空格，但这个 word 就没有，因此要给它补上
+            # 不然会变成一个单词输出一个句子
+            if 字幕全部文本[0] == ' ':
+                Word = ' ' + Word
+
             if i == 0:
                 开始时间 = BeginTime
                 本句字幕内容 = Word
